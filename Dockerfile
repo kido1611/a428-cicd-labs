@@ -7,8 +7,11 @@ COPY . .
 RUN npm install && \
   npm run build
 
-FROM nginx:alpine-perl AS runner
+EXPOSE 3000
 
-WORKDIR /usr/share/nginx/html
+CMD [ "npm", "start" ]
 
-COPY --from=builder /app/build .
+# FROM nginx:alpine-perl AS runner
+# WORKDIR /usr/share/nginx/html
+#
+# COPY --from=builder /app/build .
