@@ -1,0 +1,5 @@
+services:
+  react-app:
+    image: abduzzy/react-app:latest
+    ports:
+      - "80:80"
