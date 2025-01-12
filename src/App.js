@@ -12,7 +12,7 @@ class App extends Component {
         </header>
         <p className="App-intro">
           Tugas submission Dicoding - CICD menggunakan jenkins (localhost) dan
-          React app (AWS)
+          React app (AWS) - Revisi 2
         </p>
       </div>
     );
