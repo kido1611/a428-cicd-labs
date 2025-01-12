@@ -3,7 +3,6 @@ node {
 
   def remote = [:]
   remote.name = "aws-server"
-  remote.host = "13.229.135.73"
   remote.allowAnyHosts = true
 
   docker.image('node:16-buster-slim').inside('-p 3000:3000') {
@@ -34,7 +33,8 @@ node {
       app.push("latest")
     }
 
-    withCredentials([sshUserPrivateKey(credentialsId: 'aws-server', keyFileVariable: 'identity',  usernameVariable: 'userName')]) {
+    withCredentials([sshUserPrivateKey(credentialsId: 'aws-server', keyFileVariable: 'identity',  usernameVariable: 'userName'), string(credentialsId: 'server-ip', variable: 'ip')]) {
+      remote.host = ip 
       remote.user = userName
       remote.identityFile = identity
 
