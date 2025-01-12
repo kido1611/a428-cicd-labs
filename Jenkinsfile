@@ -39,7 +39,11 @@ node {
       remote.identityFile = identity
 
       sshCommand remote: remote, command: 'docker compose pull'
-      sshCommand remote: remote, command: 'docker compose restart'
+      // memastikan docker image terbaru sudah diambil
+      sshCommand remote: remote, command: 'docker image pull abduzzy/react-app:latest'
+
+      sshCommand remote: remote, command: 'docker compose down'
+      sshCommand remote: remote, command: 'docker compose up -d'
     }
   }
 }
