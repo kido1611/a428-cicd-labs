@@ -34,7 +34,8 @@ node {
     //  app.push("latest")
     //}
 
-    withCredentials([sshUserPrivateKey(credentialsId: 'aws-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
+    //withCredentials([sshUserPrivateKey(credentialsId: 'aws-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
+    withCredentials([sshUserPrivateKey(credentialsId: 'aws-server', keyFileVariable: 'identity',  usernameVariable: 'userName')]) {
         remote.user = userName
         remote.identityFile = identity
 
