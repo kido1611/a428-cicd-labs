@@ -19,7 +19,7 @@ node {
     input message: 'Lanjutkan ke tahap Deploy? (Tekan tombol "Proceed" untuk melanjutkan)'
   }
   stage('Deploy') {
-    // Harus dihapus di production
+    // Harus dihapus di production. Ditaambahkan karena sesuai dengan submission 1
     docker.image('node:16-buster-slim').inside('-p 3000:3000') {
       sh './jenkins/scripts/deliver.sh'
       sleep time: 1, unit: 'MINUTES'
@@ -32,6 +32,9 @@ node {
       app.push("${env.BUILD_NUMBER}")
       app.push("latest")
     }
+
+    // Untuk memastikan docker image terbaru sudah ada di docker hub
+    sleep time: 10, unit: 'SECONDS'
 
     withCredentials([sshUserPrivateKey(credentialsId: 'aws-server', keyFileVariable: 'identity',  usernameVariable: 'userName'), string(credentialsId: 'server-ip', variable: 'ip')]) {
       remote.host = ip 
